@@ -11,12 +11,35 @@ with open(budget_data, 'r') as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
 
     header = next(csvreader)
+for row in csvreader:
     
 #Count the number of months 
     num_months = list(csvreader)
     months = len(num_months)
-    print(f"Total Number of Months: {str(months)}")
+    total_profitsandloss = 0
+total_profitsandloss = total_profitsandloss + int(abs(row["Profit/Losses"]))
+print(f"Total Number of Months: {str(months)}")
+#total profits/loss
+
+print(total_profitsandloss)
+#total profits/losses
+#with open(budget_data, 'r') as csvfile:
+#
+#   # Split the data on commas
+#   csvreader = csv.reader(csvfile, delimiter=',')
+#
+#   header = next(csvreader)
+#for row in csvreader:
+#   num = int(row["Profit/Losses"])
+#   if num >= 0:
+#       profits = sum(num)
+#   if num < 0:
+#       losses = sum(num)
+#print (profits)
+#print (losses)
+
 #total loss/profits
+
     #total = 0
     #for row in csvreader:
        # _total = row[1]
@@ -33,11 +56,12 @@ with open(budget_data, 'r') as csvfile:
    
         #total += int(row[1])
     #print (total) 
-for num in csvreader[1]:
-    if num >= 0:
-        profits = sum(num)
+#for num in csvreader[1]:
+#  if num >= 0:
+#       profits = sum(num)
      
-    if num < 0:
-        losses = sum(num)
-print (profits)
-print (losses)
+#   if num < 0:
+#       losses = sum(num)
+#print (profits)
+#print (losses)
+
