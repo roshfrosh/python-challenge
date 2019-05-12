@@ -45,6 +45,7 @@ with open(electionData, newline = "") as csvfile:
     # stores the winner in winner variable
     winner = electees[highestVoteIndex]
 
+#statements to print to the console
 print("Election Results")
 print("------------------------------")
 print(f"Total Votes: {str(voteTotal)}")
@@ -54,3 +55,15 @@ for i in range(len(electees)):
 print("------------------------------")
 print(f"Winner: {winner}")
 print("------------------------------")
+
+#will output the program to a text file
+output = open("output.txt", "w")
+line1 = "Election Results \n"
+line2 = "------------------------------\n"
+line3 = str(f'Total Votes: {str(voteTotal)}\n')
+line4 = "------------------------------\n"
+for i in range(len(electees)):
+    line = str(f'{electees[i]}: {str(votePercentages[i])} ({str(voteCounter[i])})')
+line5 = "------------------------------\n"
+line6 = str(f'Winner: {winner}\n')
+line7 = "------------------------------\n"
