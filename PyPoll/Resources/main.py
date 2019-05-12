@@ -15,55 +15,56 @@ votePercentages = []
 voteTotal = 0
 
 with open(electionData, newline = "") as csvfile:
-    csvread = csv.reader(csvfile, delimiter = ",")
-    head = next(csvread)
-    for row in csvread:
+        csvread = csv.reader(csvfile, delimiter = ",")
+        header = next(csvread)
+        for row in csvread:
         # adds +1 to vote total
-        voteTotal += 1 
+            voteTotal += 1 
         # if clause that adds the electee to electee list if they havent appeared yet
-        if row[2] not in electees:
-            electees.append(row[2])
-            index = electees.index(row[2])
-            voteCounter.append(1)
+            if row[2] not in electees:
+                electees.append(row[2])
+                index = electees.index(row[2])
+                voteCounter.append(1)
         # else clause that adds a vote to electee if already in list
-        else:
-            index = electees.index(row[2])
-            voteCounter[index] += 1
+            else:
+                index = electees.index(row[2])
+                voteCounter[index] += 1
     
     # for statement looping through each of the votenumbers in voteCounter list that calculates the percentage for each of the candidates
-    for voteNumber in voteCounter:
-        percentage = (voteNumber / voteTotal) * 100
+        for voteNumber in voteCounter:
+            percentage = (voteNumber / voteTotal) * 100
         # rounds percentage so that it's not too big of a number
-        percentage = round(percentage)
+            percentage = round(percentage)
         #formats percentage
-        percentage = "%.3f%%" % percentage
+            percentage = "%.3f%%" % percentage
         # appends percentages to votePercentages list
-        votePercentages.append(percentage)
+            votePercentages.append(percentage)
     
     # find index of highest vote count in vote counter list
-    highestVoteIndex = voteCounter.index(max(voteCounter))
+        highestVoteIndex = voteCounter.index(max(voteCounter))
     # stores the winner in winner variable
-    winner = electees[highestVoteIndex]
+        winner = electees[highestVoteIndex]
 
 #statements to print to the console
-print("Election Results")
-print("------------------------------")
-print(f"Total Votes: {str(voteTotal)}")
-print("------------------------------")
-for i in range(len(electees)):
-      print(f"{electees[i]}: {str(votePercentages[i]) } ({str(voteCounter[i])})")
-print("------------------------------")
-print(f"Winner: {winner}")
-print("------------------------------")
+        print("Election Results")
+        print("------------------------------")
+        print(f"Total Votes: {str(voteTotal)}")
+        print("------------------------------")
+        for i in range(len(electees)):
+            print(f"{electees[i]}: {str(votePercentages[i]) } ({str(voteCounter[i])})")
+        print("------------------------------")
+        print(f"Winner: {winner}")
+        print("------------------------------")
 
 #will output the program to a text file
-output = open("output.txt", "w")
-line1 = "Election Results \n"
-line2 = "------------------------------\n"
-line3 = str(f'Total Votes: {str(voteTotal)}\n')
-line4 = "------------------------------\n"
-for i in range(len(electees)):
-    line = str(f'{electees[i]}: {str(votePercentages[i])} ({str(voteCounter[i])})')
-line5 = "------------------------------\n"
-line6 = str(f'Winner: {winner}\n')
-line7 = "------------------------------\n"
+with open("output.txt", "w") as x: 
+   print("Election Results \n", file = x)
+   print("------------------------------\n", file=x)
+   print(str(f'Total Votes: {str(voteTotal)}\n'), file = x)
+   print("------------------------------\n", file = x)
+   for i in range(len(electees)):
+        print(str(f'{electees[i]}: {str(votePercentages[i])} ({str(voteCounter[i])})'), file = x)
+   print("------------------------------\n", file = x)
+   print(str(f'Winner: {winner}\n'), file = x)
+   print("------------------------------\n", file = x)
+   
