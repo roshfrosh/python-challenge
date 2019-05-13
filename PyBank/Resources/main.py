@@ -1,8 +1,20 @@
+#importing packages
 import os
 import csv
 
-#Path to collect data 
-budget_data = os.path.join('budget_data.csv')
+#loading in csv file
+budget_data = os.path.join("budget_data.csv")
+
+#creating lists
+profits = []
+net_change = []
+months =[]
+
+#setting variables
+#total_profits = 0
+#p1 = 0 #initial profit 
+#total_profit_change = 0
+#months = 0
 
 # Read in the CSV file
 with open(budget_data, 'r') as csvfile:
@@ -14,11 +26,53 @@ with open(budget_data, 'r') as csvfile:
     for row in csvreader:
     
 #Count the number of months 
-        num_months = list(csvreader)
-    months = len(num_months)
-    print(f"Total Number of Months: {str(months)}")
-#total profits and loss 
-    total_profitsandloss = 0
-    total_profitsandloss += int(row[1])
-    print(f"Total: ${int(total_profitsandloss)}")
+        months.append(row[0])
+        each_month = len(set(months))
+        #months = months + 1
+
+#Calculate total profits
+        profits.append(int(row[1]))
+        total_profits = sum(profits)
+
+#ccalculate average of profit change
+        #pf = int(row[1])
+        #net_changes = pf - p1
+        #net_change.append(net_changes)
+        #total_profit_change = total_profit_change + net_changes
+        #p1 = pf
+        #average_profit = total_profit_change/len(row[0])
+    for i in range(0,len(profits) -1): 
+
+        net_change.append(int(profits[i+1]) - int(profits[i]))
+    average_profits = sum(net_change)/len(net_change)
+#append max n min 
+        #max_min_dates.append(row[0])
+
+#find the increase and decrease
+    greatest_increase = max(profits)
+    greatest_decrease = min(profits)
+    
+#dates of max and min
+    max_profit_date = months[profits.index(greatest_increase)]
+    min_profit_date = months[profits.index(greatest_decrease)]
+
+#print statements
+    print("Financial Analysis")
+    print("---------------------------------")
+    print(f"Total Number of Months: {str(each_month)}")
+    print(f"Total: ${str(int(total_profits))}")
+    print(f"Average Change: $ {str(int(average_profits))}" )
+    print("Greatest Increase in Profits: " + str(max_profit_date) + " ($" + str(greatest_increase) + ")")
+    print("Greatest Decrease in Profits: " + str(min_profit_date) + " ($" + str(greatest_decrease)+ ")")
+#will output the program to a text file
+with open("output.txt", "w") as x: 
+   print("Financial Analysis \n", file = x)
+   print("-----------------------------------\n", file=x)
+   print(f"Total Number of Months: {str(months)}\n", file = x)  
+   print(f"Total: ${str(int(total_profits))}\n", file = x)
+   print(f"Average Change: $ {str(int(average_profits))}\n", file = x )
+   print("Greatest Increase in Profits: " + str(max_profit_date) + " ($" + str(greatest_increase) + ")\n", file = x)
+   print("Greatest Decrease in Profits: " + str(min_profit_date) + " ($" + str(greatest_decrease)+ ")\n", file = x)
+
+
 
