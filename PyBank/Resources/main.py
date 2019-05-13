@@ -10,16 +10,10 @@ profits = []
 net_change = []
 months =[]
 
-#setting variables
-#total_profits = 0
-#p1 = 0 #initial profit 
-#total_profit_change = 0
-#months = 0
-
 # Read in the CSV file
 with open(budget_data, 'r') as csvfile:
 
-    # Split the data on commas
+# Split the data on commas
     csvreader = csv.reader(csvfile, delimiter=',')
 
     header = next(csvreader)
@@ -34,16 +28,12 @@ with open(budget_data, 'r') as csvfile:
         profits.append(int(row[1]))
         total_profits = sum(profits)
 
-#ccalculate average of profit change
-        #pf = int(row[1])
-        #net_changes = pf - p1
-        #net_change.append(net_changes)
-        #total_profit_change = total_profit_change + net_changes
-        #p1 = pf
-        #average_profit = total_profit_change/len(row[0])
+#for loop appending the net change list for each month 
+
     for i in range(0,len(profits) -1): 
 
         net_change.append(int(profits[i+1]) - int(profits[i]))
+#calculate the averae
     average_profits = sum(net_change)/len(net_change)
 #append max n min 
         #max_min_dates.append(row[0])
